@@ -1,0 +1,39 @@
+#top-bar {
+    background-color: rgb(75, 75, 75);
+}
+
+#center-top-bar-div {
+    display: flex;
+    flex-direction: column;
+}
+
+#title {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#button-div {
+    margin: 0 auto;
+    display: flex;
+    width: 30%;
+}
+
+#add-node-button {
+    width: 50%;
+    background-color: aqua;
+}
+
+#next-button {
+    width: 50%;
+    background-color: lightgreen;
+}
+
+#nodes-div {
+    position: relative;
+    background-color: black;
+    height: 60%;
+}
+
+#bottom-bar {
+    background-color: black;
+}
