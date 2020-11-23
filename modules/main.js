@@ -1,3 +1,5 @@
+import { createNodesArray, printNodes } from '/modules/createNodes.js';
+
 var nextButton = document.getElementById('next-button')
 var addNodeButton = document.getElementById('add-node-button')
 
@@ -5,38 +7,22 @@ var nodes = []
 var lines = []
 
 
-
-
 function setUp(){
-
     // add button listeners to buttons
     if(nextButton != null && addNodeButton != null){
         nextButton.addEventListener('click', selectStartAndEndNode)
         addNodeButton.addEventListener('click', addAnotherNode)
     }
-    readJsFiles('/modules/printTaskBar.js')
-    console.log(value)
-    printNewTaskBar('hello')
-    
-    createNodesArray('print')
-}
 
-function onStart(){
-
-    // create nodes creates the nodes and returns an array of node objects
-    //nodes = createNodesArray()
-
-    //lines = createLines(nodes)
-
-    //printNodes(nodes)
-
-    //printLines(lines)
-
+    // create 5 new nodes to place on the screen.
+    nodes = createNodesArray(5)
+    printNodes(nodes)
+    // print nodes to screen
 
 }
+
 
 function addAnotherNode(){
-    console.log("Add another node")
     nodes = addNodeToArray(nodes)
 
     reprint()
@@ -56,4 +42,3 @@ var readJsFiles = url => {
 
 
 setUp()
-onStart()

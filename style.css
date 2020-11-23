@@ -30,8 +30,8 @@
 
 #nodes-div {
     position: relative;
-    background-color: black;
-    height: 60%;
+    background-color: rgb(238, 221, 221);
+    height: 500px;
 }
 
 #bottom-bar {
