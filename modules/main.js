@@ -36,8 +36,8 @@ function selectStartAndEndNode(){
     console.log('next step')
 }
 
-const resizeEvent = (message) => {
-    console.log(message)
+const resizeEvent = () => {
+    drawLines(nodes, lines)
 }
 
 window.addEventListener('resize', resizeEvent)

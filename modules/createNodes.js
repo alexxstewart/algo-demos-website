@@ -50,7 +50,7 @@ export const printNodes = nodesArray => {
 
 export const addNewNode = nodes => {
     var node = {
-        number: nodes.length,
+        number: nodes.length+1,
         html: `<div id=node${nodes.length+1}><p>${nodes.length+1}</p></div>`,
         x: 50,
         y: 50

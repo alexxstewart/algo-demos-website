@@ -1,36 +1,43 @@
+
+
 export const drawLines = (nodes, lines) => {
-    
     // delete previous lines
     deleteLines(lines)
-
+    lines = []
+    let visitedNodeArray = []
     // create an array which represents which nodes have been visited
-    let visitedNodeArray = initialiseVisitedNodesArray([], nodes.length)
+    visitedNodeArray = initialiseVisitedNodesArray(nodes.length)
 
     //get parent div
     const parentDiv = document.getElementById('nodes-div')
 
     let nodesLeft = true
-
     while(nodesLeft){
         for(let i = 0; i < nodes.length; i++){
             const currentNode = nodes[i]
             const closestNode = findClosestNode(nodes, currentNode, visitedNodeArray[i])
             if(closestNode != null){
-                let line = createLine(currentNode.x, currentNode.y, closestNode.x, closestNode.y)
+                // create the line element
+                let lineElement = createLine(currentNode.x, currentNode.y, closestNode.x, closestNode.y)
+
+                // create the line object to store the line element and the nodes 
+                let line = {
+                    line: lineElement,
+                    nodeA: currentNode,
+                    nodeB: closestNode
+                }
+
                 lines.push(line)
                 // now we must check that the line does not collide with any other lines
-                if(!collision(lines, line)){
-                    parentDiv.appendChild(line)
+                if(!collision(nodes, lines, line)){
+                    parentDiv.appendChild(lineElement)
                 }
                 
                 // make the nodes visited in the array
                 visitedNodeArray[i][closestNode.number-1] = true
-                console.log(closestNode.number-1, i)
                 visitedNodeArray[closestNode.number-1][i] = true
             }
         }
-
-        console.log(visitedNodeArray)
 
         // check if there are any unvisited nodes in the array
         if(!unvisitedNodes(visitedNodeArray)){
@@ -91,7 +98,6 @@ const createLine = (x1, y1, x2, y2) => {
 
     let nodesDiv = document.getElementById("nodes-div")
     let divRect = nodesDiv.getBoundingClientRect()
-    let topShift = divRect.top
     let width = divRect.width
     let height = divRect.height
 
@@ -129,14 +135,15 @@ const deleteLines = lines => {
     lines = []
 }
 
-const initialiseVisitedNodesArray = (array, size) => {
+const initialiseVisitedNodesArray = (size) => {
+    const newArray = []
     for(let i = 0; i < size; i++){
-        array[i] = []
+        newArray[i] = []
         for(let j = 0; j < size; j++){
-            i === j ? array[i].push(true) : array[i].push(false)
+            i === j ? newArray[i].push(true) : newArray[i].push(false)
         }
     }
-    return array
+    return newArray
 }
 
 const unvisitedNodes = (visitedArray) => {
@@ -150,6 +157,10 @@ const unvisitedNodes = (visitedArray) => {
     }
 }
 
-const collision = (lines, line) => {
+const collision = (nodes, lines, line) => {
+    // line collision test
+
+
+    // node collision test
     return false;
 }
