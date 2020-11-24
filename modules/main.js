@@ -1,4 +1,5 @@
 import { createNodesArray, printNodes } from '/modules/createNodes.js';
+import { dragElements } from '/modules/dragNode.js'
 
 var nextButton = document.getElementById('next-button')
 var addNodeButton = document.getElementById('add-node-button')
@@ -14,10 +15,12 @@ function setUp(){
         addNodeButton.addEventListener('click', addAnotherNode)
     }
 
-    // create 5 new nodes to place on the screen.
+    // create 5 new nodes to place on the screen and print them.
     nodes = createNodesArray(5)
     printNodes(nodes)
-    // print nodes to screen
+
+    // allow these nodes to be dragged
+    dragElements(nodes)
 
 }
 
