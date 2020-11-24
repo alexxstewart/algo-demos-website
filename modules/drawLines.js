@@ -2,30 +2,54 @@ export const drawLines = (nodes, lines) => {
     
     // delete previous lines
     deleteLines(lines)
-    let visitedNodeArray = []
+
+    // create an array which represents which nodes have been visited
+    let visitedNodeArray = initialiseVisitedNodesArray([], nodes.length)
+
     //get parent div
     const parentDiv = document.getElementById('nodes-div')
-    for(let i = 0; i < nodes.length; i++){
-        visitedNodeArray[i] = []
-        const currentNode = nodes[i]
-        const closestNode = findClosestNode(nodes, currentNode, visitedNodeArray[i])
-        let line = createLine(currentNode.x, currentNode.y, closestNode.x, closestNode.y)
-        parentDiv.appendChild(line)
 
-        visitedNodeArray[i]
+    let nodesLeft = true
+
+    while(nodesLeft){
+        for(let i = 0; i < nodes.length; i++){
+            const currentNode = nodes[i]
+            const closestNode = findClosestNode(nodes, currentNode, visitedNodeArray[i])
+            if(closestNode != null){
+                let line = createLine(currentNode.x, currentNode.y, closestNode.x, closestNode.y)
+                lines.push(line)
+                // now we must check that the line does not collide with any other lines
+                if(!collision(lines, line)){
+                    parentDiv.appendChild(line)
+                }
+                
+                // make the nodes visited in the array
+                visitedNodeArray[i][closestNode.number-1] = true
+                console.log(closestNode.number-1, i)
+                visitedNodeArray[closestNode.number-1][i] = true
+            }
+        }
+
+        console.log(visitedNodeArray)
+
+        // check if there are any unvisited nodes in the array
+        if(!unvisitedNodes(visitedNodeArray)){
+            nodesLeft = false;  
+        }
+         
     }
 }
 
-const findClosestNode = (nodes, currentNode) => {
+const findClosestNode = (nodes, currentNode, visitedArray) => {
     
     let minDistance = {
         distance: Infinity,
-        closestNode: 0
+        closestNode: null
     }
 
     for(let i = 0; i < nodes.length; i++){
         let node = nodes[i]
-        if(currentNode.number !== node.number){
+        if(!visitedArray[node.number-1]){
             let distance = computeDistanceBetweenTwoNodes(currentNode, node)
             if(distance < minDistance.distance){
                 minDistance = {
@@ -103,4 +127,29 @@ const deleteLines = lines => {
     });
     removeLines(document.querySelectorAll('.line'))
     lines = []
+}
+
+const initialiseVisitedNodesArray = (array, size) => {
+    for(let i = 0; i < size; i++){
+        array[i] = []
+        for(let j = 0; j < size; j++){
+            i === j ? array[i].push(true) : array[i].push(false)
+        }
+    }
+    return array
+}
+
+const unvisitedNodes = (visitedArray) => {
+    for(let i = 0; i < visitedArray.length; i++){
+        let innerArray = visitedArray[i]
+        for(let j = 0; j < innerArray.length; j++){
+            if(!innerArray[j]){
+                return true;
+            }
+        }
+    }
+}
+
+const collision = (lines, line) => {
+    return false;
 }
