@@ -1,16 +1,18 @@
 export const drawLines = (nodes, lines) => {
     
     // delete previous lines
-
+    deleteLines(lines)
+    let visitedNodeArray = []
     //get parent div
     const parentDiv = document.getElementById('nodes-div')
     for(let i = 0; i < nodes.length; i++){
+        visitedNodeArray[i] = []
         const currentNode = nodes[i]
-        const closestNode = findClosestNode(nodes, currentNode)
-        console.log(currentNode, closestNode)
+        const closestNode = findClosestNode(nodes, currentNode, visitedNodeArray[i])
         let line = createLine(currentNode.x, currentNode.y, closestNode.x, closestNode.y)
-        console.log(line)
         parentDiv.appendChild(line)
+
+        visitedNodeArray[i]
     }
 }
 
@@ -93,4 +95,12 @@ const createLine = (x1, y1, x2, y2) => {
     y = (y / height) * 100 + 4
 
     return createLineElement(x, y, c, alpha);
+}
+
+const deleteLines = lines => {
+    const removeLines = (elements) => elements.forEach(element => {
+        element.remove()
+    });
+    removeLines(document.querySelectorAll('.line'))
+    lines = []
 }

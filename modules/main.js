@@ -33,16 +33,13 @@ function addAnotherNode(){
 }
 
 function selectStartAndEndNode(){
-    console.log("next step")
+    console.log('next step')
 }
 
-var readJsFiles = url => {
-    let head = document.getElementsByTagName('head')[0]
-    let script = document.createElement('script')
-    script.src = url
-    head.appendChild(script)
+const resizeEvent = (message) => {
+    console.log(message)
 }
 
-
+window.addEventListener('resize', resizeEvent)
 
 setUp()
