@@ -1,6 +1,7 @@
-
+import { checkCollision} from './collision.js'
 
 export const drawLines = (nodes, lines) => {
+
     // delete previous lines
     deleteLines(lines)
     lines = []
@@ -27,10 +28,10 @@ export const drawLines = (nodes, lines) => {
                     nodeB: closestNode
                 }
 
-                lines.push(line)
                 // now we must check that the line does not collide with any other lines
-                if(!collision(nodes, lines, line)){
+                if(!checkCollision(nodes, lines, line)){
                     parentDiv.appendChild(lineElement)
+                    lines.push(line)
                 }
                 
                 // make the nodes visited in the array
@@ -41,9 +42,8 @@ export const drawLines = (nodes, lines) => {
 
         // check if there are any unvisited nodes in the array
         if(!unvisitedNodes(visitedNodeArray)){
-            nodesLeft = false;  
-        }
-         
+            nodesLeft = false; 
+        }     
     }
 }
 
@@ -70,9 +70,20 @@ const findClosestNode = (nodes, currentNode, visitedArray) => {
 }
 
 const computeDistanceBetweenTwoNodes = (nodeA, nodeB) => {
-    const A_X = nodeA.x, A_Y = nodeA.y, B_X = nodeB.x, B_Y = nodeB.y
+    // get the parent div
+    const parentDiv = document.getElementById('nodes-div').getBoundingClientRect()
+
+    let A_X = nodeA.x, A_Y = nodeA.y, B_X = nodeB.x, B_Y = nodeB.y
+
+    // we need to convert the % values to pixel values
+    A_X = A_X / 100 * parentDiv.width
+    A_Y = A_Y / 100 * parentDiv.height
+    B_X = B_X / 100 * parentDiv.width
+    B_Y = B_Y / 100 * parentDiv.height
+
     const xDiff = A_X - B_X
     const yDiff = A_Y - B_Y
+
     return Math.pow(Math.abs(yDiff), 2) + Math.pow(Math.abs(xDiff), 2)
 }
 
@@ -155,12 +166,4 @@ const unvisitedNodes = (visitedArray) => {
             }
         }
     }
-}
-
-const collision = (nodes, lines, line) => {
-    // line collision test
-
-
-    // node collision test
-    return false;
 }
