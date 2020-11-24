@@ -8,13 +8,13 @@ export const createNodesArray = (numNodes) => {
     const maxY = parentSize.height
 
     // create default values instead of random values
-    const coordsArray = [[20,20], [80,60], [50,50], [30,70], [60,20]]
+    const defaultCoordsArray = [[20,20], [80,60], [50,50], [30,70], [60,20]]
 
     for(let i = 1; i < numNodes+1; i++){
         var node = {
             html: `<div id=node${i}><p>${i}</p></div>`,
-            x: coordsArray[i-1][0],
-            y: coordsArray[i-1][1]
+            x: defaultCoordsArray[i-1][0],
+            y: defaultCoordsArray[i-1][1]
         }
         nodes.push(node)
     }
@@ -22,9 +22,9 @@ export const createNodesArray = (numNodes) => {
     return nodes
 }
 
-export const printNodes = (nodesArray) => {
+export const printNodes = nodesArray => {
     const parentDiv = document.getElementById('nodes-div')
-
+    parentDiv.innerHTML = null
     nodesArray.forEach((element, index) => {
         parentDiv.innerHTML += element.html
         const nodeDiv = document.getElementById(`node${index+1}`)
@@ -45,4 +45,15 @@ export const printNodes = (nodesArray) => {
 
         nodeDiv.setAttribute('style', nodeStyle)
     });
+}
+
+export const addNewNode = nodes => {
+    var node = {
+        html: `<div id=node${nodes.length+1}><p>${nodes.length+1}</p></div>`,
+        x: 50,
+        y: 50
+    }
+
+    nodes.push(node)
+    return nodes
 }
