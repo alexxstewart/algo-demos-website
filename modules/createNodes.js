@@ -12,6 +12,7 @@ export const createNodesArray = (numNodes) => {
 
     for(let i = 1; i < numNodes+1; i++){
         var node = {
+            number: i,
             html: `<div id=node${i}><p>${i}</p></div>`,
             x: defaultCoordsArray[i-1][0],
             y: defaultCoordsArray[i-1][1]
@@ -49,6 +50,7 @@ export const printNodes = nodesArray => {
 
 export const addNewNode = nodes => {
     var node = {
+        number: i,
         html: `<div id=node${nodes.length+1}><p>${nodes.length+1}</p></div>`,
         x: 50,
         y: 50

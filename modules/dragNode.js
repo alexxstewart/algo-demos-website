@@ -1,4 +1,6 @@
-export function dragElements(nodes) {
+import { drawLines } from "./drawLines.js"
+
+export function dragElements(nodes, lines) {
     // get boundaires of parent div
     for(let i = 0; i < nodes.length; i++){      
         //get the node from the array
@@ -47,6 +49,8 @@ export function dragElements(nodes) {
                     currentNode.x = newX
                 }
             }
+
+            drawLines(nodes, lines)
         }
 
         function closeDragElement() {

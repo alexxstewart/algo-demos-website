@@ -1,5 +1,6 @@
 import { createNodesArray, printNodes, addNewNode } from '/modules/createNodes.js';
 import { dragElements } from '/modules/dragNode.js'
+import { drawLines } from '/modules/drawLines.js'
 
 var nextButton = document.getElementById('next-button')
 var addNodeButton = document.getElementById('add-node-button')
@@ -17,9 +18,9 @@ function setUp(){
     // create 5 new nodes to place on the screen and print them.
     nodes = createNodesArray(5)
     printNodes(nodes)
-
+    drawLines(nodes, lines)
     // allow these nodes to be dragged
-    dragElements(nodes)
+    dragElements(nodes, lines)
 
 }
 
@@ -27,7 +28,8 @@ function setUp(){
 function addAnotherNode(){
     nodes = addNewNode(nodes)
     printNodes(nodes)
-    dragElements(nodes)
+    drawLines(nodes, lines)
+    dragElements(nodes, lines)
 }
 
 function selectStartAndEndNode(){
