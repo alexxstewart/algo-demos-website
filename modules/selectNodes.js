@@ -5,13 +5,14 @@ export const selectNodes = (nodes, array) => {
 
         // get current node
         let currentNode = document.getElementById(`node${i+1}`)
+        let node = nodes[i]
 
         // set the cursor to 'grab'
         currentNode.style.cursor = 'grab'
 
         currentNode.onmousedown = (e) => {
             let elementSelected = e.path[0]
-            array.push(elementSelected)
+            array.push(node)
             elementSelected.style.backgroundColor = 'red'
             if(array.length == 2){
                 selectLinesBetweenNodes(array)

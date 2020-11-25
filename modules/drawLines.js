@@ -5,6 +5,7 @@ export const drawLines = (nodes, lines) => {
     // delete previous lines
     deleteLines(lines)
     lines = []
+
     let visitedNodeArray = []
     // create an array which represents which nodes have been visited
     visitedNodeArray = initialiseVisitedNodesArray(nodes.length)
@@ -20,6 +21,7 @@ export const drawLines = (nodes, lines) => {
             if(closestNode != null){
                 // create the line element
                 let lineElement = createLine(currentNode.x, currentNode.y, closestNode.x, closestNode.y)
+                lineElement.setAttribute('id', `${currentNode.number}-${closestNode.number}`)
 
                 // create the line object to store the line element and the nodes 
                 let line = {
@@ -45,6 +47,8 @@ export const drawLines = (nodes, lines) => {
             nodesLeft = false; 
         }     
     }
+
+    return lines;
 }
 
 const findClosestNode = (nodes, currentNode, visitedArray) => {
@@ -90,7 +94,7 @@ const computeDistanceBetweenTwoNodes = (nodeA, nodeB) => {
 const createLineElement = (x, y, length, angle) => {
     let line = document.createElement('div');
     line.className = 'line'
-    let styles = 'border: 1px solid greenyellow; '
+    let styles = 'border: 2px solid greenyellow; '
                + 'width: ' + length + '%; '
                + 'height: 0px; '
                + '-moz-transform: rotate(' + angle + 'rad); '

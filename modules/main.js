@@ -2,6 +2,7 @@ import { createNodesArray, printNodes, addNewNode } from '/modules/createNodes.j
 import { dragElements, disableNodeDrag } from '/modules/dragNode.js'
 import { drawLines } from '/modules/drawLines.js'
 import { selectNodes, stopNodeSelection, showStartAndEnd } from '/modules/selectNodes.js'
+import { lineSelection } from '/modules/selectLines.js'
 
 let nextButton = document.getElementById('next-button')
 let addNodeButton = document.getElementById('add-node-button')
@@ -9,6 +10,7 @@ let addNodeButton = document.getElementById('add-node-button')
 let nodes = []
 let lines = []
 let selectedNodesArray = []
+let selectedLines = []
 
 
 function setUp(){
@@ -20,10 +22,9 @@ function setUp(){
     // create 5 new nodes to place on the screen and print them.
     nodes = createNodesArray(5)
     printNodes(nodes)
-    drawLines(nodes, lines)
+    lines = drawLines(nodes, lines)
     // allow these nodes to be dragged
     dragElements(nodes, lines)
-
 }
 
 
@@ -56,6 +57,9 @@ export function selectLinesBetweenNodes(array){
 
     // show start and end nodes
     showStartAndEnd(array)
+
+    lineSelection(nodes, lines, array, selectedLines)
+
 }
 
 function selectStartAndEndNode(){
