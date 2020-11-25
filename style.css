@@ -28,6 +28,12 @@
     background-color: lightgreen;
 }
 
+#text-space {
+    margin: 0 auto;
+    color: azure;
+    font-size: 20px;
+}
+
 #nodes-div {
     position: relative;
     background-color: rgb(121, 121, 121);

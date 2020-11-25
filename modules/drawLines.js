@@ -9,7 +9,7 @@ export const drawLines = (nodes, lines) => {
     // create an array which represents which nodes have been visited
     visitedNodeArray = initialiseVisitedNodesArray(nodes.length)
 
-    //get parent div
+    //get parent div to add the lines to
     const parentDiv = document.getElementById('nodes-div')
 
     let nodesLeft = true

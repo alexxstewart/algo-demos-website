@@ -33,7 +33,7 @@ export function dragElements(nodes, lines) {
             const toRight = mouseX > 25
             const toLeft = mouseX < parentSize.width -25
 
-            let newY = (mouseY/parentSize.height)*100-26
+            let newY = (mouseY/parentSize.height)*100 - 38
             let newX = (mouseX/parentSize.width)*100-2
 
             if( belowTop && aboveBottom ){
@@ -58,5 +58,18 @@ export function dragElements(nodes, lines) {
             document.onmouseup = null
             document.onmousemove = null
         }
+    }
+}
+
+export const disableNodeDrag = (nodes) => {
+    for(let i = 0; i < nodes.length; i++){
+        let element = document.getElementById(`node${i+1}`)
+
+        // remove the cursor on hover
+        element.style.cursor = 'default'
+        // remove references to on mouse event functions
+        element.onmousedown = null
+        document.onmouseup = null
+        document.onmousemove = null
     }
 }

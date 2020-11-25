@@ -1,12 +1,14 @@
 import { createNodesArray, printNodes, addNewNode } from '/modules/createNodes.js';
-import { dragElements } from '/modules/dragNode.js'
+import { dragElements, disableNodeDrag } from '/modules/dragNode.js'
 import { drawLines } from '/modules/drawLines.js'
+import { selectNodes, stopNodeSelection, showStartAndEnd } from '/modules/selectNodes.js'
 
-var nextButton = document.getElementById('next-button')
-var addNodeButton = document.getElementById('add-node-button')
+let nextButton = document.getElementById('next-button')
+let addNodeButton = document.getElementById('add-node-button')
 
-var nodes = []
-var lines = []
+let nodes = []
+let lines = []
+let selectedNodesArray = []
 
 
 function setUp(){
@@ -32,11 +34,47 @@ function addAnotherNode(){
     dragElements(nodes, lines)
 }
 
+function displayTextUnderTitle(text){
+
+    let parentElement = document.getElementById('text-space')
+    parentElement.innerHTML = `<p>${text}</p>`
+}
+
+function deleteTopButtons(){
+    let buttonDiv = document.getElementById('button-div')
+    buttonDiv.parentNode.removeChild(buttonDiv)
+}
+
+// once two nodes have been selected we can allow the user to draw a path between these nodes
+export function selectLinesBetweenNodes(array){
+
+    // now disable the ability to add nodes to the array
+    stopNodeSelection(nodes)
+
+    // display new text to the screen
+    displayTextUnderTitle('Click on lines between nodes to input your path')
+
+    // show start and end nodes
+    showStartAndEnd(array)
+}
+
 function selectStartAndEndNode(){
-    console.log('next step')
+
+    disableNodeDrag(nodes)
+
+    deleteTopButtons()
+
+    displayTextUnderTitle('Select a start and an end node')
+
+    selectNodes(nodes, selectedNodesArray)
+}
+
+function itemAdded(){
+    console.log('Item added')
 }
 
 const resizeEvent = () => {
+    printNodes(nodes)
     drawLines(nodes, lines)
 }
 
