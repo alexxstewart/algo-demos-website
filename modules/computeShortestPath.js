@@ -8,8 +8,18 @@ export const shortestPath = (lines, selectedNodes) => {
     // we need to also keep track of the lines that we have selected
     let selectedLines = []
 
+    // we also need an array to store all the options for each iteration of the algorithm
+    let lineOptions = []
+    lineOptions = getOptions(lines, currentNode, lineOptions, selectedLines)
+
     // we can now iterate through the lines to compute the shortest path
-    while(true){
+    let count = 0;
+    while(count < 8){
+        count++
+        console.log('Line Options: ')
+        for(let i = 0; i < lineOptions.length; i++){
+            console.log(lineOptions[i])
+        }
 
         // do a check to see if the lines we have selected reach the end node
         if(completedPath(selectedLines, selectedNodes[1])){
@@ -17,8 +27,11 @@ export const shortestPath = (lines, selectedNodes) => {
             break
         }
 
-        let minLine = minimumLine(currentNode, lines, selectedLines)
+        let minLine = minimumLine(lineOptions)
         selectedLines.push(minLine)
+        
+        // remove the now selected line from the options
+        lineOptions = lineOptions.filter(item => item !== minLine)
 
         // we need to change the currentNode to where the line went
         if(minLine.nodeA == currentNode){
@@ -28,8 +41,14 @@ export const shortestPath = (lines, selectedNodes) => {
             // we select nodeA to be the current node
             currentNode = minLine.nodeA
         }
-        console.log(selectedLines)
-        //console.log('computing')
+
+        //once we have selected a node we want to add the next nodes line to the lineOptions array
+        lineOptions = getOptions(lines, currentNode, lineOptions, selectedLines) 
+
+        console.log('Selected Lines: ')
+        for(let i = 0; i < selectedLines.length; i++){
+            console.log(selectedLines[i])
+        }
     }
     console.log(selectedLines)
 }
@@ -58,20 +77,16 @@ const computeLineLength = (lines) => {
     return lines
 }
 
-const minimumLine = (nodeAt, lines, selectedLines) => {
+const minimumLine = (potentialMinLines) => {
     let minDistance = Infinity
     let line = null
 
-    for(let i = 0; i < lines.length; i++){
-        let currentLine = lines[i]
-        // we first need to check if the line has been selected before
-        if(!selectedLines.includes(currentLine)){
-            if(currentLine.nodeA == nodeAt || currentLine.nodeB == nodeAt){
-                if(currentLine.length < minDistance){
-                    minDistance = currentLine.length
-                    line = currentLine
-                }
-            }
+    for(let i = 0; i < potentialMinLines.length; i++){
+        let currentLine = potentialMinLines[i]
+        // all we need to do is select the line with the smallest distance
+        if(currentLine.length < minDistance){
+            minDistance = currentLine.length
+            line = currentLine
         }
     }
 
@@ -86,4 +101,17 @@ const completedPath = (lines, endNode) => {
         }
     }
     return false
+}
+
+const getOptions = (lines, node, potentialPathLines, selectedLines) => {
+    // here we add all the lines that are available to select from
+    for(let i = 0; i < lines.length; i++){
+        let line = lines[i]
+
+        // check if the line starts or ends at the node and that it isnt already selected and in the potentialPathLines array
+        if((line.nodeA.number == node.number || line.nodeB.number == node.number) && !selectedLines.includes(line) && !potentialPathLines.includes(line)){
+            potentialPathLines.push(line)
+        }
+    }
+    return potentialPathLines
 }
