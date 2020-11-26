@@ -62,6 +62,10 @@ export function selectLinesBetweenNodes(array){
 
 }
 
+export function validateUserAnswer(pathSelected){
+    console.log("validating")
+}
+
 export function updateLines(newLines){
     lines = newLines
 }

@@ -1,3 +1,5 @@
+import { validateUserAnswer } from './main.js'
+
 let globalNodes = null
 let globalLines = null
 let selectedLines = []
@@ -23,18 +25,17 @@ const highlightLinesFromCurrentNode = (currentNode, lines) => {
 
     //if there are already lines from the start node to the end node then stop here
     if(checkPathFromStartToEnd(selectedLines, selectedNodes)){
-
+        validateUserAnswer(selectedLines)
     }else{
         console.log(selectedLines.length)
         for(let i = 0; i < lines.length; i++){
             
             // get current line
             let line = lines[i]
-            console.log('----------------------------')
+
             // first check if the line has already been selected
             if(lineNotSelected(line)){
                 if(line.nodeA.number == currentNode.number || line.nodeB.number == currentNode.number){
-                    console.log(line)
                     highlightLineOnHover(line, currentNode.number)
                 }
             }
@@ -47,7 +48,6 @@ const highlightLineOnHover = (line, currentNodeNumber) => {
     let  lineElement = line.line
 
     lineElement.onmouseover = () => {
-        console.log('mouse over')
         lineElement.style.height = '4px';
         lineElement.style.backgroundColor = 'yellow';
         lineElement.style.cursor = 'pointer';
@@ -76,8 +76,20 @@ const highlightLineOnHover = (line, currentNodeNumber) => {
     }
 }
 
-const checkPathFromStartToEnd = () => {
-    // we just want to iterate through    
+const checkPathFromStartToEnd = (lines, nodes) => {
+
+    const endNode = nodes[1]
+
+    // we just want to iterate through the selected lines and see if any of the lines join to the end node
+    for(let i = 0; i < lines.length; i++){
+        let currentLine = lines[i]
+        if(currentLine.nodeA.number == endNode.number){
+            return true
+        }else if(currentLine.nodeB.number == endNode.number){
+            return true
+        }
+    } 
+    return false
 }
 
 
