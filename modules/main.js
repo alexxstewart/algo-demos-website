@@ -3,6 +3,7 @@ import { dragElements, disableNodeDrag } from '/modules/dragNode.js'
 import { drawLines } from '/modules/drawLines.js'
 import { selectNodes, stopNodeSelection, showStartAndEnd } from '/modules/selectNodes.js'
 import { lineSelection } from '/modules/selectLines.js'
+import { shortestPath } from './computeShortestPath.js' 
 
 let nextButton = document.getElementById('next-button')
 let addNodeButton = document.getElementById('add-node-button')
@@ -63,7 +64,8 @@ export function selectLinesBetweenNodes(array){
 }
 
 export function validateUserAnswer(pathSelected){
-    console.log("validating")
+    const path = shortestPath(lines, selectedNodesArray)
+    console.log(path)
 }
 
 export function updateLines(newLines){
