@@ -1,5 +1,6 @@
 import { checkCollision} from './collision.js'
 
+
 export const drawLines = (nodes, lines) => {
 
     // delete previous lines
@@ -47,7 +48,6 @@ export const drawLines = (nodes, lines) => {
             nodesLeft = false; 
         }     
     }
-
     return lines;
 }
 

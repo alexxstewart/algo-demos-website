@@ -31,7 +31,7 @@ function setUp(){
 function addAnotherNode(){
     nodes = addNewNode(nodes)
     printNodes(nodes)
-    drawLines(nodes, lines)
+    lines = drawLines(nodes, lines)
     dragElements(nodes, lines)
 }
 
@@ -58,8 +58,12 @@ export function selectLinesBetweenNodes(array){
     // show start and end nodes
     showStartAndEnd(array)
 
-    lineSelection(nodes, lines, array, selectedLines)
+    lineSelection(nodes, lines, array)
 
+}
+
+export function updateLines(newLines){
+    lines = newLines
 }
 
 function selectStartAndEndNode(){
@@ -70,16 +74,12 @@ function selectStartAndEndNode(){
 
     displayTextUnderTitle('Select a start and an end node')
 
-    selectNodes(nodes, selectedNodesArray)
-}
-
-function itemAdded(){
-    console.log('Item added')
+    selectNodes(nodes, selectedNodesArray, lines)
 }
 
 const resizeEvent = () => {
     printNodes(nodes)
-    drawLines(nodes, lines)
+    lines = drawLines(nodes, lines)
 }
 
 window.addEventListener('resize', resizeEvent)

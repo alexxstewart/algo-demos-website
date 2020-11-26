@@ -1,4 +1,5 @@
 import { drawLines } from "./drawLines.js"
+import { updateLines } from './main.js'
 
 export function dragElements(nodes, lines) {
     // get boundaires of parent div
@@ -50,7 +51,8 @@ export function dragElements(nodes, lines) {
                 }
             }
 
-            drawLines(nodes, lines)
+            lines = drawLines(nodes, lines)
+            updateLines(lines)
         }
 
         function closeDragElement() {

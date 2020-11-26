@@ -1,4 +1,13 @@
-export const lineSelection = (nodes, lines, selectedNodes, selectedLines) => {
+let globalNodes = null
+let globalLines = null
+let selectedLines = []
+let selectedNodes = null
+
+export const lineSelection = (nodes, lines, inputNodes) => {
+
+    globalNodes = nodes
+    globalLines = lines
+    selectedNodes = inputNodes
 
     /* We iterate through the lines, if a line is connected to the start node then we allow it to be
      highlighted and selected. If a line is selected then we call another function to give the user options to select lines from that node
@@ -12,84 +21,80 @@ to the current node
 */
 const highlightLinesFromCurrentNode = (currentNode, lines) => {
 
-    for(let i = 0; i < lines.length; i++){
-        
-        // get current line
-        let line = lines[i]
+    //if there are already lines from the start node to the end node then stop here
+    if(checkPathFromStartToEnd(selectedLines, selectedNodes)){
 
-        if(line.nodeA.number == currentNode.number || line.nodeB.number == currentNode.number){
-            highlightLineOnHover(line)
+    }else{
+        console.log(selectedLines.length)
+        for(let i = 0; i < lines.length; i++){
+            
+            // get current line
+            let line = lines[i]
+            console.log('----------------------------')
+            // first check if the line has already been selected
+            if(lineNotSelected(line)){
+                if(line.nodeA.number == currentNode.number || line.nodeB.number == currentNode.number){
+                    console.log(line)
+                    highlightLineOnHover(line, currentNode.number)
+                }
+            }
         }
     }
-
 }
 
-const highlightLineOnHover = (line) => {
-
-    // get the parent div
-    let parentDiv = document.getElementById('nodes-div')
-
+const highlightLineOnHover = (line, currentNodeNumber) => {
     // get the line element
     let  lineElement = line.line
-    console.log(lineElement)
-
-    //let elements = document.getElementsByClassName('line')
-    //console.log(elements)
-
-    //let element = document.getElementById('1-4')
-    //lineElement.parentNode.removeChild(lineElement)
-
-    let gotElement = document.getElementById(lineElement.id)
-    console.log(gotElement === lineElement)
-    console.log(gotElement)
-
-    // create a new line element
-    let newLineElement = document.createElement('div');
 
     lineElement.onmouseover = () => {
-
         console.log('mouse over')
-
-        // remove the line from the page
-        lineElement.parentNode.removeChild(lineElement)
-    
-        let length = lineElement.style.width
-        let angle = lineElement.style.transform
-        let x = lineElement.style.left
-        let y = lineElement.style.top
-
-        let xNumber = parseInt(x.substring(0, x.length-1)) - 0.01
-        let yNumber = parseInt(y.substring(0, y.length-1)) - 1 
-
-        console.log(xNumber, yNumber)
-        newLineElement.className = 'line'
-        let styles = 'border: 5px solid yellow; '
-                   + 'width: ' + length + '; '
-                   + 'height: 0px; '
-                   + '-moz-transform: ' + angle +'; '
-                   + '-webkit-transform: ' + angle +'; '
-                   + '-o-transform: ' + angle +'; '
-                   + '-ms-transform: ' + angle +'; '  
-                   + 'position: absolute; '
-                   + 'top: ' + yNumber + '% ; '
-                   + 'left: ' + xNumber + '% ; '
-                   + 'z-index: 8;';
-        newLineElement.setAttribute('style', styles);  
-    
-        parentDiv.appendChild(newLineElement)
+        lineElement.style.height = '4px';
+        lineElement.style.backgroundColor = 'yellow';
+        lineElement.style.cursor = 'pointer';
     }
     
-    newLineElement.onmouseout = () => {
-        console.log('mouse out event')
-        newLineElement.parentNode.removeChild(newLineElement)
-        parentDiv.appendChild(lineElement)
+    lineElement.onmouseout = () => {
+        lineElement.style.height = '0px';
+        lineElement.style.backgroundColor = '';
     }
     
+    lineElement.onclick = () => {
+        
+        // stop all current event handlers for the line
+        stopEvents(globalLines)
+        lineElement.style.height = '4px';
+        lineElement.style.backgroundColor = 'red';
+        lineElement.style.cursor = 'default';
+
+        selectedLines.push(line)
+
+        if(line.nodeA.number == currentNodeNumber){
+            highlightLinesFromCurrentNode(line.nodeB, globalLines)
+        }else{
+            highlightLinesFromCurrentNode(line.nodeA, globalLines)
+        }
+    }
 }
 
 const checkPathFromStartToEnd = () => {
-    
+    // we just want to iterate through    
 }
 
-const highlight = (lineElement) => {
+
+const stopEvents = (lines) => {
+    for(let i = 0; i < lines.length; i++){
+        let currentLineElement = lines[i].line
+        currentLineElement.onmouseover = null
+        currentLineElement.onmouseout = null
+    }
+}
+
+const lineNotSelected = (line) => {
+    // check that the line has not been selected
+    for(let i = 0; i < selectedLines.length; i++){
+        if(selectedLines[i].line.id == line.line.id){
+            return false
+        }
+    }
+    return true
 }

@@ -1,6 +1,6 @@
 import { selectLinesBetweenNodes } from '/modules/main.js' 
 
-export const selectNodes = (nodes, array) => {
+export const selectNodes = (nodes, array, lines) => {
     for(let i = 0; i < nodes.length; i++){
 
         // get current node
@@ -15,7 +15,7 @@ export const selectNodes = (nodes, array) => {
             array.push(node)
             elementSelected.style.backgroundColor = 'red'
             if(array.length == 2){
-                selectLinesBetweenNodes(array)
+                selectLinesBetweenNodes(array, lines)
             }
         }
     }
