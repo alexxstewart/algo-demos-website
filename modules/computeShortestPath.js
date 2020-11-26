@@ -6,11 +6,32 @@ export const shortestPath = (lines, selectedNodes) => {
     let currentNode = selectedNodes[0]
 
     // we need to also keep track of the lines that we have selected
+    let selectedLines = []
 
     // we can now iterate through the lines to compute the shortest path
     while(true){
-        minimumLine(lines, )
+
+        // do a check to see if the lines we have selected reach the end node
+        if(completedPath(selectedLines, selectedNodes[1])){
+            console.log('breaking')
+            break
+        }
+
+        let minLine = minimumLine(currentNode, lines, selectedLines)
+        selectedLines.push(minLine)
+
+        // we need to change the currentNode to where the line went
+        if(minLine.nodeA == currentNode){
+            // we want to select nodeB to be the current node
+            currentNode = minLine.nodeB
+        }else{
+            // we select nodeA to be the current node
+            currentNode = minLine.nodeA
+        }
+        console.log(selectedLines)
+        //console.log('computing')
     }
+    console.log(selectedLines)
 }
 
 const computeLineLength = (lines) => {
@@ -37,7 +58,32 @@ const computeLineLength = (lines) => {
     return lines
 }
 
-const minimumLine = (lines, selectedLines) => {
+const minimumLine = (nodeAt, lines, selectedLines) => {
+    let minDistance = Infinity
+    let line = null
+
+    for(let i = 0; i < lines.length; i++){
+        let currentLine = lines[i]
+        // we first need to check if the line has been selected before
+        if(!selectedLines.includes(currentLine)){
+            if(currentLine.nodeA == nodeAt || currentLine.nodeB == nodeAt){
+                if(currentLine.length < minDistance){
+                    minDistance = currentLine.length
+                    line = currentLine
+                }
+            }
+        }
+    }
 
     return line
+}
+
+const completedPath = (lines, endNode) => {
+    for(let i = 0; i < lines.length; i++){
+        if(lines[i].nodeA.number == endNode.number || lines[i].nodeB.number == endNode.number){
+            // we have a completed path so we break here
+            return true
+        }
+    }
+    return false
 }
