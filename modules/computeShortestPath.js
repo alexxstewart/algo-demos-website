@@ -70,11 +70,12 @@ const populateGraph = (graph, nodes, lines) => {
 
     // add nodes to the graph
     for(let i = 0; i < nodes.length; i++){
-        graph.addNode(`${node.number}`)
+        graph.addNode(`${nodes[i].number}`)
     }
 
-    console.log(graph)
+    console.log(graph.nodes())
 
-    g.addDirectedEdge("E", "G", 50);
+    // add the edges to the graph
+    //graph.addDirectedEdge("E", "G", 50);
 }
 
