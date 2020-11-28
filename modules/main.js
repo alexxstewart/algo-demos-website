@@ -64,7 +64,7 @@ export function selectLinesBetweenNodes(array){
 }
 
 export function validateUserAnswer(pathSelected){
-    const path = shortestPath(lines, selectedNodesArray)
+    const path = shortestPath(lines, nodes, selectedNodesArray)
     console.log(path)
 }
 
