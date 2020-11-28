@@ -9,6 +9,9 @@ export const shortestPath = (lines, nodes, selectedNodes) => {
     let g = new Graph();
 
     g = populateGraph(g, nodes, lines)
+
+    let path = g.shortestPath(`${selectedNodes[0].number}`,`${selectedNodes[1].number}`)
+    console.log(path)
 }
 
 const djikstraAlgorithm = (startNode) => {
@@ -76,6 +79,12 @@ const populateGraph = (graph, nodes, lines) => {
     console.log(graph.nodes())
 
     // add the edges to the graph
-    //graph.addDirectedEdge("E", "G", 50);
+    for(let i = 0; i < lines.length; i++){
+        let line = lines[i]
+        graph.addEdge(`${line.nodeA.number}`,`${line.nodeB.number}`, line.length)
+        graph.addEdge(`${line.nodeB.number}`,`${line.nodeA.number}`, line.length)
+    }
+
+    return graph
 }
 
