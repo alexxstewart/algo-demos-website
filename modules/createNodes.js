@@ -42,7 +42,7 @@ export const printNodes = nodesArray => {
         + 'display: flex;'
         + 'justify-content: center;'
         + 'align-items: center;'
-        + 'z-index: 9;';
+        + 'z-index: 10;';
 
         nodeDiv.setAttribute('style', nodeStyle)
     });

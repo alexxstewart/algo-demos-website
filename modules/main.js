@@ -4,6 +4,7 @@ import { drawLines } from '/modules/drawLines.js'
 import { selectNodes, stopNodeSelection, showStartAndEnd } from '/modules/selectNodes.js'
 import { lineSelection } from '/modules/selectLines.js'
 import { shortestPath } from './computeShortestPath.js' 
+import { animatePath } from './animations.js'
 
 let nextButton = document.getElementById('next-button')
 let addNodeButton = document.getElementById('add-node-button')
@@ -65,7 +66,8 @@ export function selectLinesBetweenNodes(array){
 
 export function validateUserAnswer(pathSelected){
     const path = shortestPath(lines, nodes, selectedNodesArray)
-    console.log(path)
+    
+    animatePath(lines, path)
 }
 
 export function updateLines(newLines){

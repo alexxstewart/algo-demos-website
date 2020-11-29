@@ -11,39 +11,9 @@ export const shortestPath = (lines, nodes, selectedNodes) => {
     g = populateGraph(g, nodes, lines)
 
     let path = g.shortestPath(`${selectedNodes[0].number}`,`${selectedNodes[1].number}`)
-    console.log(path)
-}
 
-const djikstraAlgorithm = (startNode) => {
-    let distances = {};
- 
-    // Stores the reference to previous nodes
-    let prev = {};
-    let pq = new PriorityQueue(this.nodes.length * this.nodes.length);
- 
-    // Set distances to all nodes to be infinite except startNode
-    distances[startNode] = 0;
-    pq.enqueue(startNode, 0);
-    this.nodes.forEach(node => {
-       if (node !== startNode) distances[node] = Infinity;
-       prev[node] = null;
-    });
- 
-    while (!pq.isEmpty()) {
-       let minNode = pq.dequeue();
-       let currNode = minNode.data;
-       let weight = minNode.priority;
-       this.edges[currNode].forEach(neighbor => {
-          let alt = distances[currNode] + neighbor.weight;
-          if (alt < distances[neighbor.node]) {
-             distances[neighbor.node] = alt;
-             prev[neighbor.node] = currNode;
-             pq.enqueue(neighbor.node, distances[neighbor.node]);
-          }
-       });
-    }
-    return distances;
- }
+    return path
+}
 
 const computeLineLength = (lines) => {
 
@@ -61,7 +31,6 @@ const computeLineLength = (lines) => {
         const yPx = yDiff/100 * parentDiv.height
 
         const distance = xPx ** 2 + yPx ** 2
-        console.log(`Distance between ${nodeA.number} and ${nodeB.number} is: ${Math.round(distance)/100}`)
 
         // assign the length value to the line
         lines[i].length = Math.round(distance)
@@ -75,8 +44,6 @@ const populateGraph = (graph, nodes, lines) => {
     for(let i = 0; i < nodes.length; i++){
         graph.addNode(`${nodes[i].number}`)
     }
-
-    console.log(graph.nodes())
 
     // add the edges to the graph
     for(let i = 0; i < lines.length; i++){
