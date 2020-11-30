@@ -77,8 +77,8 @@ function animate(pathCoords, length, numLines){
         stroke-dasharray: ${length};
         stroke-dashoffset: ${length};
         animation: dash ${numLines}s linear forwards;
-        stroke-width: 20px;
-        stroke: red;
+        stroke-width: 10px;
+        stroke: yellow;
     `;
 
     pathElement.setAttribute('style', styleString)

@@ -129,15 +129,15 @@ const createLine = (x1, y1, x2, y2) => {
     let sx = (x1 + x2) / 2,
         sy = (y1 + y2) / 2;
 
-    let x = sx - c / 2,
-        y = sy;
+    let x = sx - c / 2 + 25,
+        y = sy + 25;
 
     let alpha = Math.PI - Math.atan2(-b, a);
 
     // convert the values back to relative values
     c = (c / width) * 100
-    x = (x / width) * 100 + 2
-    y = (y / height) * 100 + 4
+    x = (x / width) * 100
+    y = (y / height) * 100
 
     return createLineElement(x, y, c, alpha);
 }

@@ -14,8 +14,11 @@ let lines = []
 let selectedNodesArray = []
 let selectedLines = []
 
+let currentState = ''
+
 
 function setUp(){
+    currentState = 'setup'
 
     // add button listeners to buttons
     nextButton.addEventListener('click', selectStartAndEndNode)
@@ -31,6 +34,7 @@ function setUp(){
 
 
 function addAnotherNode(){
+    currentState = 'added node'
     nodes = addNewNode(nodes)
     printNodes(nodes)
     lines = drawLines(nodes, lines)
@@ -51,6 +55,7 @@ function deleteTopButtons(){
 // once two nodes have been selected we can allow the user to draw a path between these nodes
 export function selectLinesBetweenNodes(array){
 
+    currentState = 'user path'
     // now disable the ability to add nodes to the array
     stopNodeSelection(nodes)
 
@@ -65,6 +70,7 @@ export function selectLinesBetweenNodes(array){
 }
 
 export function validateUserAnswer(pathSelected){
+    currentState = 'showing answer'
     const path = shortestPath(lines, nodes, selectedNodesArray)
     
     animatePath(lines, path)
@@ -86,8 +92,15 @@ function selectStartAndEndNode(){
 }
 
 const resizeEvent = () => {
-    printNodes(nodes)
-    lines = drawLines(nodes, lines)
+    if(currentState == 'setup'){
+        printNodes(nodes)
+        lines = drawLines(nodes, lines)
+        dragElements(nodes, lines)
+    }else if(currentState == 'added node'){
+        printNodes(nodes)
+        lines = drawLines(nodes, lines)
+        dragElements(nodes, lines)
+    }
 }
 
 window.addEventListener('resize', resizeEvent)
