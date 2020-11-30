@@ -44,12 +44,6 @@
     background-color: black;
 }
 
-#line1 {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: dash 5s linear forwards;
-}
-
 @keyframes dash {
     to {
         stroke-dashoffset: 0;
