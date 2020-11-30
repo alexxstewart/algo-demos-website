@@ -9,7 +9,7 @@ export async function animatePath(lines, path) {
 
     let linesNum = 0
     let svgPath = []
-
+    let lineLengthSum = 0
     for(let i = 0; i < path.length-1; i++){
         for(let j = 0; j < lines.length; j++){
             let lineFrom = path[i]
@@ -25,6 +25,10 @@ export async function animatePath(lines, path) {
                 svgPath.push(currentLine.nodeB.x)
                 svgPath.push(currentLine.nodeB.y)
                 linesNum++
+
+                // add the line length onto the running sum
+                lineLengthSum += Math.sqrt(currentLine.length)
+
             }else if(currentLine.nodeA.number == lineTo && currentLine.nodeB.number == lineFrom){
                 console.log(`Path from ${lineFrom} to ${lineTo}`)
                 if(linesNum == 0){
@@ -35,14 +39,16 @@ export async function animatePath(lines, path) {
                 svgPath.push(currentLine.nodeA.x)
                 svgPath.push(currentLine.nodeA.y)
                 linesNum++
+
+                // add the line length onto the running sum
+                lineLengthSum += Math.sqrt(currentLine.length)
             }
         }
     }
-
-    animate(svgPath)
+    animate(svgPath, lineLengthSum, linesNum)
 }
 
-function animate(pathCoords){
+function animate(pathCoords, length, numLines){
     
     // we need to convert line coords into pixel values
     const parentSize = document.getElementById('nodes-div').getBoundingClientRect()
@@ -51,18 +57,13 @@ function animate(pathCoords){
         pathCoords[i+1] = pathCoords[i+1]/100 * parentSize.height + 25;
     }
 
-    // compute the line length to help with the animation
-    const lineLength = 10000//computeLine(length)
-
-    console.log(pathCoords)
+    // now we can create the string
     let pathString = 'M'
     pathString += `${pathCoords[0]} ${pathCoords[1]} `
     for(let i = 2; i < pathCoords.length; i+=2){
         console.log(pathCoords[i], pathCoords[i+1])
         pathString += `L${pathCoords[i]} ${pathCoords[i+1]} `
     }
-    //pathString += 'Z'
-    console.log(pathString)
 
     // now we can create the path element and add the pathString as a d property
     let pathElement = document.createElementNS('http://www.w3.org/2000/svg','path')
@@ -73,9 +74,9 @@ function animate(pathCoords){
 
     const styleString = `
         fill: none;
-        stroke-dasharray: ${lineLength};
-        stroke-dashoffset: ${lineLength};
-        animation: dash 5s linear forwards;
+        stroke-dasharray: ${length};
+        stroke-dashoffset: ${length};
+        animation: dash ${numLines}s linear forwards;
         stroke-width: 20px;
         stroke: red;
     `;
@@ -93,6 +94,12 @@ function animate(pathCoords){
     */
 }
 
+function computeLength(coords){
+    
+    let distance = 0;
+
+    // iterate through the coords and add the distance for each line on along the way
+}
 async function addSVGLine(line, lineNumber){
     console.log("Adding SVG line")
     // get the coords of the lines end points
