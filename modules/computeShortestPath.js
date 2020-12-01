@@ -9,7 +9,6 @@ export const shortestPath = (lines, nodes, selectedNodes) => {
     let g = new Graph();
 
     g = populateGraph(g, nodes, lines)
-
     let path = g.shortestPath(`${selectedNodes[0].number}`,`${selectedNodes[1].number}`)
 
     return path

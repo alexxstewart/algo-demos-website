@@ -109,6 +109,9 @@ function selectStartAndEndNode(){
 
     displayTextUnderTitle('Select a start and an end node')
 
+    // remove previous nodes
+    selectedNodesArray = []
+    
     selectNodes(nodes, selectedNodesArray, lines)
 }
 

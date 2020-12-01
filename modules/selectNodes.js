@@ -1,6 +1,7 @@
 import { selectLinesBetweenNodes } from '/modules/main.js' 
 
 export const selectNodes = (nodes, array, lines) => {
+    
     for(let i = 0; i < nodes.length; i++){
 
         // get current node
@@ -15,12 +16,21 @@ export const selectNodes = (nodes, array, lines) => {
             currentNode.style.backgroundColor = 'orangered'
         }
         currentNode.onmouseout = function(){
-            currentNode.style.backgroundColor = 'black  '
+            currentNode.style.backgroundColor = 'black'
         }
 
         currentNode.onmousedown = (e) => {
-            let elementSelected = e.path[0]
+            let elementSelected = null
+            if(e.target.nodeName === 'P'){
+                elementSelected = e.path[1]
+            }else{
+                elementSelected = e.path[0]
+            }
+
+            // add the node to the selected nodes array
             array.push(node)
+
+            // change the style of the node
             elementSelected.style.backgroundColor = 'orangered'
             elementSelected.style.borderColor = 'orangered'
 

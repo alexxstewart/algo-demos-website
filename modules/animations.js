@@ -53,8 +53,8 @@ function animate(pathCoords, length, numLines){
     // we need to convert line coords into pixel values
     const parentSize = document.getElementById('nodes-div').getBoundingClientRect()
     for(let i = 0; i < pathCoords.length; i += 2){
-        pathCoords[i] = pathCoords[i]/100 * parentSize.width + 25;
-        pathCoords[i+1] = pathCoords[i+1]/100 * parentSize.height + 25;
+        pathCoords[i] = pathCoords[i]/100 * parentSize.width + 28;
+        pathCoords[i+1] = pathCoords[i+1]/100 * parentSize.height + 28;
     }
 
     // now we can create the string
