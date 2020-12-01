@@ -11,8 +11,12 @@ export const selectNodes = (nodes, array, lines) => {
         currentNode.style.cursor = 'pointer'
 
         // add hover events
-        currentNode.onmouseover = hoverInEvent
-        currentNode.onmouseout = hoverOutEvent
+        currentNode.onmouseover = function(){
+            currentNode.style.backgroundColor = 'orangered'
+        }
+        currentNode.onmouseout = function(){
+            currentNode.style.backgroundColor = 'black  '
+        }
 
         currentNode.onmousedown = (e) => {
             let elementSelected = e.path[0]
@@ -63,14 +67,4 @@ const removeNodeHoverEvents = (nodes) => {
         node.onmouseover = null
         node.onmouseout = null
     }
-}
-
-const hoverInEvent = (e) => {
-    const node = e.toElement
-    node.style.backgroundColor = 'orangered'
-}
-
-const hoverOutEvent = (e) => {
-    const node = e.fromElement
-    node.style.backgroundColor = 'black'
 }
