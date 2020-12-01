@@ -5,6 +5,7 @@ import { selectNodes, stopNodeSelection, showStartAndEnd } from '/modules/select
 import { lineSelection } from '/modules/selectLines.js'
 import { shortestPath } from './computeShortestPath.js' 
 import { animatePath } from './animations.js'
+import { checkUserAnswer } from './checkAnswer.js'
 
 let nextButton = document.getElementById('next-button')
 let addNodeButton = document.getElementById('add-node-button')
@@ -74,6 +75,8 @@ export function validateUserAnswer(pathSelected){
     const path = shortestPath(lines, nodes, selectedNodesArray)
     
     animatePath(lines, path)
+
+    const userAnswerValue = checkUserAnswer(path, pathSelected)
 }
 
 export function updateLines(newLines){
