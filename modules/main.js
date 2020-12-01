@@ -127,7 +127,12 @@ function createButtonsAgain(){
     addNodeButton.innerHTML = 'Add Node'
     addNodeButton.setAttribute('id', 'add-node-button')
 
+    nextButton = document.createElement('button')
+    nextButton.innerHTML = 'Next'
+    nextButton.setAttribute('id', 'next-button')
+
     parentDiv.appendChild(addNodeButton)
+    parentDiv.appendChild(nextButton)
 }
 
 const resizeEvent = () => {

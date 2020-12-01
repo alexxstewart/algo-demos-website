@@ -33,7 +33,7 @@ const computeLineLength = (lines) => {
         const distance = xPx ** 2 + yPx ** 2
 
         // assign the length value to the line
-        lines[i].length = Math.round(distance)
+        lines[i].length = Math.round(Math.sqrt(distance))
     }
     return lines
 }

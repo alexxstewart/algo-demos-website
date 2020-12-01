@@ -28,7 +28,7 @@ export async function animatePath(lines, path) {
                 linesNum++
 
                 // add the line length onto the running sum
-                lineLengthSum += Math.sqrt(currentLine.length)
+                lineLengthSum += currentLine.length
 
             }else if(currentLine.nodeA.number == lineTo && currentLine.nodeB.number == lineFrom){
                 if(linesNum == 0){
@@ -41,7 +41,7 @@ export async function animatePath(lines, path) {
                 linesNum++
 
                 // add the line length onto the running sum
-                lineLengthSum += Math.sqrt(currentLine.length)
+                lineLengthSum += currentLine.length
             }
         }
     }
