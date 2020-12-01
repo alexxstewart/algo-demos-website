@@ -28,6 +28,8 @@ function setUp(){
     // create on hover events
     nextButton.onmouseover = hoverInEvent
     nextButton.onmouseout = hoverOutEvent
+    addNodeButton.onmouseover = hoverInEvent
+    addNodeButton.onmouseout = hoverOutEvent
 
     // create 5 new nodes to place on the screen and print them.
     nodes = createNodesArray(5)
@@ -114,12 +116,12 @@ window.addEventListener('resize', resizeEvent)
 
 const hoverInEvent = (e) => {
     const element = e.toElement
-    element.style.backgroundColor = 'purple'
+    element.style.backgroundColor = 'white'
 }
 
 const hoverOutEvent = (e) => {
     const element = e.fromElement
-    element.style.backgroundColor = 'grey'
+    element.style.backgroundColor = 'orangered'
 }
 
 setUp()

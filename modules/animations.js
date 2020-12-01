@@ -16,7 +16,6 @@ export async function animatePath(lines, path) {
             let lineTo = path[i+1]
             let currentLine = lines[j]
             if(currentLine.nodeA.number == lineFrom && currentLine.nodeB.number == lineTo){
-                console.log(`Path from ${lineFrom} to ${lineTo}`)
                 if(linesNum == 0){
                     // add both the first and last coords of the first line
                     svgPath.push(currentLine.nodeA.x)
@@ -30,7 +29,6 @@ export async function animatePath(lines, path) {
                 lineLengthSum += Math.sqrt(currentLine.length)
 
             }else if(currentLine.nodeA.number == lineTo && currentLine.nodeB.number == lineFrom){
-                console.log(`Path from ${lineFrom} to ${lineTo}`)
                 if(linesNum == 0){
                     // add both the first and last coords of the first line
                     svgPath.push(currentLine.nodeB.x)
@@ -61,7 +59,6 @@ function animate(pathCoords, length, numLines){
     let pathString = 'M'
     pathString += `${pathCoords[0]} ${pathCoords[1]} `
     for(let i = 2; i < pathCoords.length; i+=2){
-        console.log(pathCoords[i], pathCoords[i+1])
         pathString += `L${pathCoords[i]} ${pathCoords[i+1]} `
     }
 
@@ -78,7 +75,7 @@ function animate(pathCoords, length, numLines){
         stroke-dashoffset: ${length};
         animation: dash ${numLines}s linear forwards;
         stroke-width: 10px;
-        stroke: yellow;
+        stroke: orangered;
     `;
 
     pathElement.setAttribute('style', styleString)

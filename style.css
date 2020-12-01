@@ -35,8 +35,8 @@ svg {
 
 button {
     border-radius: 20px;
-    background-color: #0836C1;
-    color: white
+    background-color: orangered;
+    color: black
 }
 
 #top-bar {
@@ -77,15 +77,19 @@ button {
 }
 
 #nodes-div {
+    margin: 0;
     position: relative;
     background-color: rgb(63, 63, 63);
     height: 500px;
 }
 
 #information-section {
+    margin: 0;
+    padding: 20px;
     background-color:  rgb(32, 32, 32);
 }
 #bottom-bar {
+    padding: 20px;
     height: 50px;
     background-color: rgb(221, 135, 23);
     z-index: 0;

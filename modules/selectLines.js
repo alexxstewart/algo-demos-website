@@ -27,7 +27,6 @@ const highlightLinesFromCurrentNode = (currentNode, lines) => {
     if(checkPathFromStartToEnd(selectedLines, selectedNodes)){
         validateUserAnswer(selectedLines)
     }else{
-        console.log(selectedLines.length)
         for(let i = 0; i < lines.length; i++){
             
             // get current line
@@ -63,7 +62,8 @@ const highlightLineOnHover = (line, currentNodeNumber) => {
         // stop all current event handlers for the line
         stopEvents(globalLines)
         lineElement.style.height = '4px';
-        lineElement.style.backgroundColor = 'red';
+        lineElement.style.backgroundColor = 'orange';
+        lineElement.style.borderColor = 'orange';
         lineElement.style.cursor = 'default';
 
         selectedLines.push(line)

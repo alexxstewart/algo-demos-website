@@ -13,7 +13,7 @@ export const selectNodes = (nodes, array, lines) => {
         currentNode.onmousedown = (e) => {
             let elementSelected = e.path[0]
             array.push(node)
-            elementSelected.style.backgroundColor = 'red'
+            elementSelected.style.backgroundColor = 'orangered'
             if(array.length == 2){
                 selectLinesBetweenNodes(array, lines)
             }
