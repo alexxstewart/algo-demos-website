@@ -8,7 +8,7 @@ export const createNodesArray = (numNodes) => {
     const maxY = parentSize.height
 
     // create default values instead of random values
-    const defaultCoordsArray = [[20,20], [80,60], [50,50], [30,70], [60,20]]
+    const defaultCoordsArray = [[20,20], [80,60], [40,45], [30,70], [60,20], [55,75]]
 
     for(let i = 1; i < numNodes+1; i++){
         var node = {
@@ -40,7 +40,7 @@ export const printNodes = nodesArray => {
         + 'height: 50px;'
         + 'left: ' + element.x + '%;'
         + 'top: ' + element.y + '%;'
-        + 'cursor: move;'
+        + 'cursor: grab;'
         + 'border-radius: 50%;'
         + 'display: flex;'
         + 'justify-content: center;'

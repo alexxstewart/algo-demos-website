@@ -1,3 +1,5 @@
+import { demoDone } from './main.js'
+
 export async function animatePath(lines, path) {
 
     // create an svg element and add it to the nodes-div element
@@ -75,80 +77,17 @@ function animate(pathCoords, length, numLines){
         stroke-dashoffset: ${length};
         animation: dash ${numLines}s linear forwards;
         stroke-width: 10px;
-        stroke: orangered;
+        stroke: rgb(0, 140, 255);
     `;
 
     pathElement.setAttribute('style', styleString)
-    /*
-    path {
-    fill: none;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: dash 5s linear forwards;
-    stroke-width: 20px;
-    stroke: yellow;
-    }
-    */
+
+    // invoke function from main after svg line has finished rendering
+    setTimeout(animationFinished, numLines * 1000);
 }
 
-function computeLength(coords){
-    
-    let distance = 0;
-
-    // iterate through the coords and add the distance for each line on along the way
-}
-async function addSVGLine(line, lineNumber){
-    console.log("Adding SVG line")
-    // get the coords of the lines end points
-    let nodeA_x = line.nodeA.x
-    let nodeA_y = line.nodeA.y
-    let nodeB_x = line.nodeB.x
-    let nodeB_y = line.nodeB.y
-
-    const shift = 25
-    // convert coords to pixel values
-    const parentSize = document.getElementById('nodes-div').getBoundingClientRect()
-    nodeA_x = nodeA_x/100 * parentSize.width + shift
-    nodeA_y = nodeA_y/100 * parentSize.height + shift
-    nodeB_x = nodeB_x/100 * parentSize.width + shift
-    nodeB_y = nodeB_y/100 * parentSize.height + shift
-
-    // add the css animation
-    cssAnimation(lineNumber)
-
-    console.log(nodeA_x, nodeA_y, nodeB_x, nodeB_y)
-    // create a line and add it to the svg element
-    var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
-    newLine.setAttribute('id','line1');
-    newLine.setAttribute('x1',nodeA_x);
-    newLine.setAttribute('y1',nodeA_y);
-    newLine.setAttribute('x2',nodeB_x);
-    newLine.setAttribute('y2',nodeB_y);
-    newLine.setAttribute("stroke", "yellow")
-    newLine.setAttribute('stroke-width', 15)
-    document.getElementById('line-container').appendChild(newLine)
-    sleep(5000)
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
-/*
-============================================================
-*/
-
-function cssAnimation(lineNum){
-    var style = document.createElement('style');
-    const lineLength = 2000
-    var keyFrames = `
-    #line${lineNum} {
-        stroke-dasharray: ${lineLength};
-        stroke-dashoffset: ${lineLength};
-        animation: dash 5s linear forwards;
-    }`;
-    document.getElementsByTagName('head')[0].appendChild(style);
+const animationFinished = () =>{
+    demoDone()
 }
 
 

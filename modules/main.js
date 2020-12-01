@@ -14,6 +14,7 @@ let nodes = []
 let lines = []
 let selectedNodesArray = []
 let selectedLines = []
+let userAnswerValue = false
 
 let currentState = ''
 
@@ -25,14 +26,8 @@ function setUp(){
     nextButton.addEventListener('click', selectStartAndEndNode)
     addNodeButton.addEventListener('click', addAnotherNode)
 
-    // create on hover events
-    nextButton.onmouseover = hoverInEvent
-    nextButton.onmouseout = hoverOutEvent
-    addNodeButton.onmouseover = hoverInEvent
-    addNodeButton.onmouseout = hoverOutEvent
-
     // create 5 new nodes to place on the screen and print them.
-    nodes = createNodesArray(5)
+    nodes = createNodesArray(6)
     printNodes(nodes)
     lines = drawLines(nodes, lines)
     // allow these nodes to be dragged
@@ -55,8 +50,7 @@ function displayTextUnderTitle(text){
 }
 
 function deleteTopButtons(){
-    let buttonDiv = document.getElementById('button-div')
-    buttonDiv.parentNode.removeChild(buttonDiv)
+    document.getElementById('button-div').innerHTML = ''
 }
 
 // once two nodes have been selected we can allow the user to draw a path between these nodes
@@ -78,11 +72,29 @@ export function selectLinesBetweenNodes(array){
 
 export function validateUserAnswer(pathSelected){
     currentState = 'showing answer'
+
+    displayTextUnderTitle('Computing shortest path now...')
+    
     const path = shortestPath(lines, nodes, selectedNodesArray)
     
-    animatePath(lines, path)
+    userAnswerValue = checkUserAnswer(path, pathSelected)
 
-    const userAnswerValue = checkUserAnswer(path, pathSelected)
+    animatePath(lines, path)
+}
+
+export function demoDone(){
+
+    if(userAnswerValue){
+        displayTextUnderTitle('Scroll down to see how this works')
+    }else{
+        displayTextUnderTitle('Scroll down to see how this works or play again.')
+        const buttonDiv = document.getElementById('button-div')
+        const newButton = document.createElement('button')
+        newButton.innerHTML = 'Play Again'
+        newButton.setAttribute('id', 'play-again-button')
+        newButton.onclick = startDemoAgain
+        buttonDiv.appendChild(newButton)
+    }
 }
 
 export function updateLines(newLines){
@@ -100,6 +112,24 @@ function selectStartAndEndNode(){
     selectNodes(nodes, selectedNodesArray, lines)
 }
 
+function startDemoAgain(){
+    document.getElementById('nodes-div').innerHTML = ''
+    displayTextUnderTitle('Drag Nodes and add new Nodes to create map')
+    createButtonsAgain()
+    setUp()
+}
+
+function createButtonsAgain(){
+    const parentDiv = document.getElementById('button-div')
+    parentDiv.innerHTML = ''
+
+    addNodeButton = document.createElement('button')
+    addNodeButton.innerHTML = 'Add Node'
+    addNodeButton.setAttribute('id', 'add-node-button')
+
+    parentDiv.appendChild(addNodeButton)
+}
+
 const resizeEvent = () => {
     if(currentState == 'setup'){
         printNodes(nodes)
@@ -113,15 +143,5 @@ const resizeEvent = () => {
 }
 
 window.addEventListener('resize', resizeEvent)
-
-const hoverInEvent = (e) => {
-    const element = e.toElement
-    element.style.backgroundColor = 'white'
-}
-
-const hoverOutEvent = (e) => {
-    const element = e.fromElement
-    element.style.backgroundColor = 'orangered'
-}
 
 setUp()

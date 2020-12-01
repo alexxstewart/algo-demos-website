@@ -9,9 +9,15 @@ html, body {
     src: url(./Azonix.otf)
 }
 
+@font-face {
+    font-family: ptSans;
+    src: url(./PT_Sans-Web-Regular.ttf)
+}
+
 p{
     text-align: center;
     color: white;
+    font-family: ptSans;
 }
 
 h1{
@@ -35,8 +41,19 @@ svg {
 
 button {
     border-radius: 20px;
-    background-color: orangered;
-    color: black
+    background-color:rgb(0, 140, 255);
+    color: black;
+    box-shadow: none;
+    cursor: pointer;
+    font-family: ptSans;
+    font-size: 18px;
+    border-style: 0px solid;
+    border-color: rgb(109, 182, 0);
+    outline: none;
+}
+
+button:hover {
+    background-color: rgb(69, 171, 255);
 }
 
 #top-bar {
@@ -58,6 +75,7 @@ button {
     display: flex;
     width: 50%;
     padding-bottom: 15px;
+    height: 50px;
 }
 
 #add-node-button {
@@ -68,6 +86,14 @@ button {
 #next-button {
     width: 50%;
     margin: 1%;
+}
+
+#play-again-button {
+    width: 50%;
+    margin: 1%;
+    position: relative;
+    top: 0%;
+    left: 27%;
 }
 
 #text-space {

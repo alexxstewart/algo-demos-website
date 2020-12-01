@@ -62,8 +62,8 @@ const highlightLineOnHover = (line, currentNodeNumber) => {
         // stop all current event handlers for the line
         stopEvents(globalLines)
         lineElement.style.height = '4px';
-        lineElement.style.backgroundColor = 'orange';
-        lineElement.style.borderColor = 'orange';
+        lineElement.style.backgroundColor = 'yellow';
+        lineElement.style.borderColor = 'yellow';
         lineElement.style.cursor = 'default';
 
         selectedLines.push(line)
