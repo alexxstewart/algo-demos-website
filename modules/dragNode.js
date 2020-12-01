@@ -24,6 +24,7 @@ export function dragElements(nodes, lines) {
     
             //get the size of the parent div when the element is clicked
             const parentSize = document.getElementById('nodes-div').getBoundingClientRect()
+            //console.log(parentSize.width, parentSize.height, parentSize.top)
 
             //get the mouse position
             var mouseX = e.clientX
@@ -40,6 +41,7 @@ export function dragElements(nodes, lines) {
             if( belowTop && aboveBottom ){
                 element.style.top = `${newY}%`
                 currentNode.y = newY
+                //console.log(newX, newY)
                 if(toLeft && toRight){
                     element.style.left = `${newX}%`
                     currentNode.x = newX
@@ -50,7 +52,6 @@ export function dragElements(nodes, lines) {
                     currentNode.x = newX
                 }
             }
-
             lines = drawLines(nodes, lines)
             updateLines(lines)
         }
