@@ -32,6 +32,9 @@ export const printNodes = nodesArray => {
 
         var nodeStyle = 'color: white;'
         + 'background-color: black;'
+        + 'border-style: solid;'
+        + 'border-color: purple;'
+        + 'border-width: 2px;'
         + 'position: absolute;'
         + 'width: 50px;'
         + 'height: 50px;'
@@ -42,7 +45,7 @@ export const printNodes = nodesArray => {
         + 'display: flex;'
         + 'justify-content: center;'
         + 'align-items: center;'
-        + 'z-index: 10;';
+        + 'z-index: 2;';
 
         nodeDiv.setAttribute('style', nodeStyle)
     });

@@ -104,7 +104,7 @@ const createLineElement = (x, y, length, angle) => {
                + 'position: absolute; '
                + 'top: ' + y + '%; '
                + 'left: ' + x + '%; '
-               + 'z-index: 8;';
+               + 'z-index: 0;';
     line.setAttribute('style', styles);  
     return line;
 }

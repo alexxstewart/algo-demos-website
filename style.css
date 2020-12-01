@@ -11,22 +11,36 @@ html, body {
 
 p{
     text-align: center;
+    color: white;
 }
 
 h1{
     text-align: center;
     font-family: azonix;
     font-size: 50px;
+    color: white;
 }
 
 h2{
     text-align: center;
     font-family: azonix;
     font-size: 30px;
+    color: white;
+}
+
+svg {
+    position: relative;
+    z-index: 1;
+}
+
+button {
+    border-radius: 20px;
+    background-color: #0836C1;
+    color: white
 }
 
 #top-bar {
-    background-color: rgb(75, 75, 75);
+    background-color: rgb(32, 32, 32);
 }
 
 #center-top-bar-div {
@@ -42,17 +56,18 @@ h2{
 #button-div {
     margin: 0 auto;
     display: flex;
-    width: 30%;
+    width: 50%;
+    padding-bottom: 15px;
 }
 
 #add-node-button {
     width: 50%;
-    background-color: aqua;
+    margin: 1%;
 }
 
 #next-button {
     width: 50%;
-    background-color: lightgreen;
+    margin: 1%;
 }
 
 #text-space {
@@ -63,10 +78,13 @@ h2{
 
 #nodes-div {
     position: relative;
-    background-color: rgb(121, 121, 121);
+    background-color: rgb(63, 63, 63);
     height: 500px;
 }
 
+#information-section {
+    background-color:  rgb(32, 32, 32);
+}
 #bottom-bar {
     height: 50px;
     background-color: rgb(221, 135, 23);
