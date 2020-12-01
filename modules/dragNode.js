@@ -24,7 +24,6 @@ export function dragElements(nodes, lines) {
     
             //get the size of the parent div when the element is clicked
             const parentSize = document.getElementById('nodes-div').getBoundingClientRect()
-            //console.log(parentSize.width, parentSize.height, parentSize.top)
 
             //get the mouse position
             var mouseX = e.clientX
@@ -33,10 +32,10 @@ export function dragElements(nodes, lines) {
             const belowTop = mouseY > parentSize.top + 25
             const aboveBottom = mouseY < parentSize.height + parentSize.top - 25
             const toRight = mouseX > 25
-            const toLeft = mouseX < parentSize.width -25
+            const toLeft = mouseX < parentSize.width - 25
 
-            let newY = (mouseY/parentSize.height)*100 - 38
-            let newX = (mouseX/parentSize.width)*100-2
+            let newY = ((mouseY - parentSize.top - 25)/parentSize.height)*100
+            let newX = ((mouseX - 25)/parentSize.width)*100
 
             if( belowTop && aboveBottom ){
                 element.style.top = `${newY}%`
