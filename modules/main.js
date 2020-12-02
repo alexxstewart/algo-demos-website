@@ -20,6 +20,12 @@ let currentState = ''
 
 
 function setUp(){
+    // reset all the arrays
+    nodes = []
+    lines = []
+    selectedNodesArray = []
+    selectedLines = []
+
     currentState = 'setup'
 
     // add button listeners to buttons
@@ -78,7 +84,8 @@ export function validateUserAnswer(pathSelected){
     displayTextUnderTitle('Computing shortest path now...')
     
     const path = shortestPath(lines, nodes, selectedNodesArray)
-    
+    console.log('Computer path: ', path)
+    console.log('User Path: ', pathSelected)
     userAnswerValue = checkUserAnswer(path, pathSelected)
 
     animatePath(lines, path)

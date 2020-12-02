@@ -11,6 +11,8 @@ export const lineSelection = (nodes, lines, inputNodes) => {
     globalLines = lines
     selectedNodes = inputNodes
 
+    selectedLines = []
+
     /* We iterate through the lines, if a line is connected to the start node then we allow it to be
      highlighted and selected. If a line is selected then we call another function to give the user options to select lines from that node
     */
@@ -25,7 +27,9 @@ const highlightLinesFromCurrentNode = (currentNode, lines) => {
 
     //if there are already lines from the start node to the end node then stop here
     if(checkPathFromStartToEnd(selectedLines, selectedNodes)){
+        console.log(selectedLines)
         validateUserAnswer(selectedLines)
+        console.log(selectedLines)
     }else{
         for(let i = 0; i < lines.length; i++){
             

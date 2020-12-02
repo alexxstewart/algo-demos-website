@@ -42,7 +42,7 @@ export const selectNodes = (nodes, array, lines) => {
             // remove the current content from within the node and add the new content
             currentNode.innerHTML = ''
             currentNode.appendChild(pElement)
-            
+
             // we change the inner text of the node
             if(array.length == 0){
                 pElement.innerHTML = 'Start Here'
@@ -54,7 +54,6 @@ export const selectNodes = (nodes, array, lines) => {
             array.push(node)
 
             if(array.length == 2){
-                removeNodeHoverEvents(nodes)
                 selectLinesBetweenNodes(array, lines)
             }
         }
@@ -72,6 +71,8 @@ export const stopNodeSelection = (nodes) => {
 
         // do nothing on mouse down
         currentNode.onmousedown = null
+        currentNode.onmouseover = null
+        currentNode.onmouseout = null
     }
 }
 
@@ -82,14 +83,4 @@ export const showStartAndEnd = (array) => {
 
     startNode.innerHTML = '<p>Start Here</p>'
     endNode.innerHTML = '<p>End Here</p>'
-}
-
-const removeNodeHoverEvents = (nodes) => {
-    for(let i = 0; i < nodes.length; i++){
-
-        // get the node
-        const node = document.getElementById(`node${i+1}`)
-        node.onmouseover = null
-        node.onmouseout = null
-    }
 }
