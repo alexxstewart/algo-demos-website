@@ -43,10 +43,15 @@ function addAnotherNode(){
     dragElements(nodes, lines)
 }
 
-function displayTextUnderTitle(text){
+function displayTextUnderTitle(text1, text2 = ''){
 
     let parentElement = document.getElementById('text-space')
-    parentElement.innerHTML = `<p>${text}</p>`
+    parentElement.innerHTML = `<p>${text1}</p>`
+
+    if(text2 !== ''){
+        parentElement.innerHTML = `<p>${text1}</p>
+        <p>${text2}</p>`
+    }
 }
 
 function deleteTopButtons(){
@@ -85,20 +90,25 @@ export function validateUserAnswer(pathSelected){
 export function demoDone(){
 
     if(userAnswerValue){
-        displayTextUnderTitle('Scroll down to see how this works')
+        displayTextUnderTitle('Correct Path! Well Done', 'Scroll down to see how this works or play again.')
+        addPlayAgainButton()
     }else{
-        displayTextUnderTitle('Scroll down to see how this works or play again.')
-        const buttonDiv = document.getElementById('button-div')
-        const newButton = document.createElement('button')
-        newButton.innerHTML = 'Play Again'
-        newButton.setAttribute('id', 'play-again-button')
-        newButton.onclick = startDemoAgain
-        buttonDiv.appendChild(newButton)
+        displayTextUnderTitle('Incorrect Path', 'Scroll down to see how this works or play again.')
+        addPlayAgainButton()
     }
 }
 
 export function updateLines(newLines){
     lines = newLines
+}
+
+function addPlayAgainButton(){
+    const buttonDiv = document.getElementById('button-div')
+    const newButton = document.createElement('button')
+    newButton.innerHTML = 'Play Again'
+    newButton.setAttribute('id', 'play-again-button')
+    newButton.onclick = startDemoAgain
+    buttonDiv.appendChild(newButton)
 }
 
 function selectStartAndEndNode(){
@@ -111,7 +121,7 @@ function selectStartAndEndNode(){
 
     // remove previous nodes
     selectedNodesArray = []
-    
+
     selectNodes(nodes, selectedNodesArray, lines)
 }
 
