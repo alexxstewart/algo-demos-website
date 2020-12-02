@@ -27,9 +27,6 @@ export const selectNodes = (nodes, array, lines) => {
                 elementSelected = e.path[0]
             }
 
-            // add the node to the selected nodes array
-            array.push(node)
-
             // change the style of the node
             elementSelected.style.backgroundColor = 'orangered'
             elementSelected.style.borderColor = 'orangered'
@@ -38,6 +35,24 @@ export const selectNodes = (nodes, array, lines) => {
             currentNode.onmouseout = null
             currentNode.onmouseover = null
             
+            // create new p element to display the text
+            let pElement = document.createElement('p')
+            pElement.style.alignContent = 'center'
+
+            // remove the current content from within the node and add the new content
+            currentNode.innerHTML = ''
+            currentNode.appendChild(pElement)
+            
+            // we change the inner text of the node
+            if(array.length == 0){
+                pElement.innerHTML = 'Start Here'
+            }else if(array.length == 1){
+                pElement.innerHTML = 'End Here'
+            }
+            
+            // add the node to the selected nodes array
+            array.push(node)
+
             if(array.length == 2){
                 removeNodeHoverEvents(nodes)
                 selectLinesBetweenNodes(array, lines)

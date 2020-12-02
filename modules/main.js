@@ -1,7 +1,7 @@
 import { createNodesArray, printNodes, addNewNode } from '/modules/createNodes.js';
 import { dragElements, disableNodeDrag } from '/modules/dragNode.js'
 import { drawLines } from '/modules/drawLines.js'
-import { selectNodes, stopNodeSelection, showStartAndEnd } from '/modules/selectNodes.js'
+import { selectNodes, stopNodeSelection } from '/modules/selectNodes.js'
 import { lineSelection } from '/modules/selectLines.js'
 import { shortestPath } from './computeShortestPath.js' 
 import { animatePath } from './animations.js'
@@ -67,9 +67,6 @@ export function selectLinesBetweenNodes(array){
 
     // display new text to the screen
     displayTextUnderTitle('Click on lines between nodes to input your path')
-
-    // show start and end nodes
-    showStartAndEnd(array)
 
     lineSelection(nodes, lines, array)
 
