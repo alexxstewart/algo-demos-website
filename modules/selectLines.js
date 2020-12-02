@@ -27,9 +27,7 @@ const highlightLinesFromCurrentNode = (currentNode, lines) => {
 
     //if there are already lines from the start node to the end node then stop here
     if(checkPathFromStartToEnd(selectedLines, selectedNodes)){
-        console.log(selectedLines)
         validateUserAnswer(selectedLines)
-        console.log(selectedLines)
     }else{
         for(let i = 0; i < lines.length; i++){
             
