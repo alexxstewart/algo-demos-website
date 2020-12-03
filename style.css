@@ -164,7 +164,7 @@ ul {
     background-color: rgb(0, 140, 255);
 }
 
-#bottom-bar-list-elements ul{
+#bottom-bar-list-elements{
     list-style-type: none;
     margin: 0 auto;
     padding: 0;
@@ -176,7 +176,7 @@ ul {
     vertical-align: middle;
 }
 
-#bottom-list-element li{
+.bottom-list-element{
     display: inline;
     padding: 20px;
     list-style-type: none;

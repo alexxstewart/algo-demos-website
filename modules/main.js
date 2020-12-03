@@ -49,7 +49,7 @@ function addAnotherNode(){
     dragElements(nodes, lines)
 }
 
-function displayTextUnderTitle(text1, text2 = ''){
+export function displayTextUnderTitle(text1, text2 = ''){
 
     let parentElement = document.getElementById('text-space')
     parentElement.innerHTML = `<p>${text1}</p>`
@@ -72,7 +72,7 @@ export function selectLinesBetweenNodes(array){
     stopNodeSelection(nodes)
 
     // display new text to the screen
-    displayTextUnderTitle('Click on lines between nodes to input your path')
+    displayTextUnderTitle('Select Lines Starting At The Start Node And Ending At The End Node To Create Your Path')
 
     lineSelection(nodes, lines, array)
 
@@ -81,7 +81,7 @@ export function selectLinesBetweenNodes(array){
 export function validateUserAnswer(pathSelected){
     currentState = 'showing answer'
 
-    displayTextUnderTitle('Computing shortest path now...')
+    displayTextUnderTitle('Computing Shortest Path Now...')
     
     const path = shortestPath(lines, nodes, selectedNodesArray)
     
@@ -93,10 +93,10 @@ export function validateUserAnswer(pathSelected){
 export function demoDone(){
 
     if(userAnswerValue){
-        displayTextUnderTitle('Correct Path! Well Done', 'Scroll down to see how this works or play again.')
+        displayTextUnderTitle('Correct Path! Well Done', 'Scroll Down To See How This Works Or Play Again.')
         addPlayAgainButton()
     }else{
-        displayTextUnderTitle('Incorrect Path', 'Scroll down to see how this works or play again.')
+        displayTextUnderTitle('Incorrect Path', 'Scroll Down To See How This Works Or Play Again.')
         addPlayAgainButton()
     }
 }
@@ -120,7 +120,7 @@ function selectStartAndEndNode(){
 
     deleteTopButtons()
 
-    displayTextUnderTitle('Select a start and an end node')
+    displayTextUnderTitle('Select a Start Node')
 
     // remove previous nodes
     selectedNodesArray = []
@@ -130,7 +130,7 @@ function selectStartAndEndNode(){
 
 function startDemoAgain(){
     document.getElementById('nodes-div').innerHTML = ''
-    displayTextUnderTitle('Drag Nodes and add new Nodes to create map')
+    displayTextUnderTitle('Drag Nodes and Add New Nodes to Create the Map')
     createButtonsAgain()
     setUp()
 }

@@ -1,4 +1,4 @@
-import { selectLinesBetweenNodes } from '/modules/main.js' 
+import { selectLinesBetweenNodes, displayTextUnderTitle } from '/modules/main.js' 
 
 export const selectNodes = (nodes, array, lines) => {
     
@@ -46,6 +46,7 @@ export const selectNodes = (nodes, array, lines) => {
             // we change the inner text of the node
             if(array.length == 0){
                 pElement.innerHTML = 'Start Here'
+                displayTextUnderTitle('Select an end node')
             }else if(array.length == 1){
                 pElement.innerHTML = 'End Here'
             }
