@@ -18,17 +18,35 @@
             </div>
         </div>
         <div id="nodes-div"></div>
-        <div id='information-section'>
-            <h2>How It Works</h2>
-            <p>The Demo above shows a common path finding algorithm in use. There are many different types of path finding algorithms which have specific use cases</p>
-            <p>In the demo above you were prompted to give and start and end node</p>
-            <p>We then iterate through the nodes in the tree and compute the shortest path between the start node and the end node. </p>
-            <p>Once we have visisted all the nodes we then terminate the algorithm</p>
-
+        <div id="info-section-div">
+            <div id='information-section'>
+                <h2>How It Works</h2>
+                <p>The Interactive Demonstration above showcases a simple way of navigating a map from on point to another. There are many path finding algorithms that can be used, all with different methods and use cases. Some of these are the <a href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* algorithm</a>, the <a href="https://en.wikipedia.org/wiki/Pathfinding#Sample_algorithm">sample algorithm</a>, and the algorithm used in this demonstration: <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Djikstra's algorithm</a>.</p>
+                <h3>Djikstra's Algorithm</h3>
+                <p>This algorithm comes in many different variations for different use cases but here we will just be explaining the more common approach at finding the shortest path between a start node and end node.</p>
+                <p>This algorithm falls under the branch of algorithms called <a href="https://en.wikipedia.org/wiki/Greedy_algorithm">greedy algorithms</a>. This is becausde for each node that the algorithm processes it select the locally optimal node (shortest distance) to travel to next.</p>
+                <p>There are 6 main steps to Djikstra's Algorithm:</p>
+                <ol id="steps-list">
+                    <li class="steps">Mark all nodes as unvisited. We can do this by placing them in a separate set</li>
+                    <li class="steps">Assign all nodes a temporary distance value. For unvisited nodes we set this to Infinity, and the starting node is set to 0</li>
+                    <li class="steps">For the current node, consider all of its unvisited neighbours and calculate their distances through the current node. Compare the newly calculated distance to the current assigned value and assign the smaller one. For example, if the current node A is marked with a distance of 6, and the edge connecting it with a neighbour B has length 2, then the distance to B through A will be 6 + 2 = 8. If B was previously marked with a distance greater than 8 then change it to 8. Otherwise, the current value will be kept.</li>
+                    <li class="steps">When we are done checking all univisted neighbours of the current node, we mark the node as visited and remove it from the unvisited set. A visited node will never be checked again</li>
+                    <li class="steps">If the destination node has been marked as visited or if the smallest path to this node is Infinity (no path to this node), then we terminate the algorithm</li>
+                    <li class="steps">Otherwise, we select the univisted node that has the smallest distance value from the current node and set it to the current node.</li>
+                </ol>
+                <h3>Applications</h3>
+                <p>While the original variation of Djikstra's algorithm (used above) has few applications in the real world, variations are built of the idea which can be better suited and further optimised for a specific task. Some example of real world uses are: </p>
+                <ul id="application-list">
+                    <li>Some variations are used in computing shortest paths in computer networks to determine ways to make data transfer easier and more effective.</li>
+                    <li>Some heavily modified versions are used in computing shortest paths between two locations on a map.</li>
+                    <li>They are used to help establiush tracks of electricity lines and oil pipelines.</li>
+                    <li>The algorithm has also been used to calculate optimal long-distance footpaths in Ethiopia and contrast them with the situation on the ground</li>
+                </ul>
+            </div>
         </div>
         <div id="bottom-bar">
             <ul class="bottom-bar-list-elements">
-                <li>Made By Alex Stewart</li>
+                <li class="bottom-list-element">Made By Alex Stewart</li>
                 <li>Algo Demos &#169 2020</li>
                 <li><a id="github-link" href="https://github.com/aste425/algo-demo-v2">Code on GitHub</a></li>
             </ul>

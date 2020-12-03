@@ -22,8 +22,13 @@ p{
 
 a {
     text-align: center;
-    color: white;
     font-family: ptSans;
+    color: rgb(165, 165, 165);
+    text-decoration: none;
+}
+
+a:hover{
+    color: orangered;
 }
 
 h1{
@@ -36,7 +41,14 @@ h1{
 h2{
     text-align: center;
     font-family: azonix;
-    font-size: 30px;
+    font-size: 34px;
+    color: white;
+}
+
+h3{
+    text-align: center;
+    font-family: azonix;
+    font-size: 24px;
     color: white;
 }
 
@@ -60,6 +72,10 @@ button {
 
 button:hover {
     background-color: rgb(69, 171, 255);
+}
+
+ul {
+    font-family: ptSans;
 }
 
 #top-bar {
@@ -116,10 +132,30 @@ button:hover {
 }
 
 #information-section {
-    margin: 0;
+    margin: 0 auto;
+    width: 60%;
     padding: 20px;
     background-color:  rgb(32, 32, 32);
 }
+
+#info-section-div {
+    background-color:  rgb(32, 32, 32);
+}
+
+#steps-list {
+    color: white;
+    padding: 10px;
+}
+
+.steps {
+    padding: 7px;
+    font-family: ptSans;
+}
+
+#application-list {
+    color: white;
+}
+
 #bottom-bar {
     display: flex;
     margin: 0 auto;
@@ -128,7 +164,7 @@ button:hover {
     background-color: rgb(0, 140, 255);
 }
 
-ul {
+#bottom-bar-list-elements ul{
     list-style-type: none;
     margin: 0 auto;
     padding: 0;
@@ -140,14 +176,14 @@ ul {
     vertical-align: middle;
 }
 
-li {
+#bottom-list-element li{
     display: inline;
     padding: 20px;
+    list-style-type: none;
 }
 
-a {
+#github-link {
     color: black;
-    text-decoration: none;
 }
 
 #github-link:hover {
