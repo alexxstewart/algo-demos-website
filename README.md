@@ -2,6 +2,8 @@
 
 This repo contains the code for this website.
 
+Website here: https://vigorous-heisenberg-cc3c2f.netlify.app/?fbclid=IwAR14wj8H2EKZvXXBKD1sdWi0IYKkwpLq4Q8cMTT8nZTFCHPrpd04VbrDymk
+
 The goal of this project was to learn the fundamentals of the JavaScript language, so all the code is written in vanilla JavaScript with no libraries. 
 
 ### Future Work:
